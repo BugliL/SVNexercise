@@ -34,5 +34,10 @@ FH.write("\n".join(training_documents))
 FH.close()
 
 FH = open(u'test.txt','w')
-FH.writelines("\n".join(test_documents))
+FH.write("\n".join(test_documents))
 FH.close()
+
+FH = open(u'categories.txt','w')
+FH.write("\n".join(common_categories))
+FH.close()
+
