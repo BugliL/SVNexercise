@@ -1,0 +1,9 @@
+sudo apt-get install python-dev
+pip install nltk
+#pip install numpy
+#sudo apt-get install scipy
+#pip install sklearn
+python -i
+>>> import nltk
+>>> nltk.download()
+download reuters

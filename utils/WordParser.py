@@ -97,21 +97,20 @@ class WordParser(object):
             word = word.replace(x,'')
         return word == ''
 
+    def removeUselessWordsAndChars(self,txt):
+        return " ".join(self.getWords(txt))
+
     def getWords(self, txt):
         """
         Estrae le parole rilevanti da un testo
         :param txt: string
         :return: list
         """
-        words = [ w.strip().lower() for w in txt.split(' ')]
-        if len(words) == 1:
-            raise ("Testo di 1 sola parola")
+        tokenizer = nltk.RegexpTokenizer(r'\w+')
+        words = tokenizer.tokenize(txt)
+        sWords = stopwords.words("english")
 
-        y = []
-        for w in words:
-            if self.isWord(w):
-                y.append(self.removePuctuation(w))
-        return y
+        return [w for w in words if w not in sWords and not self.isNumber(w)]
 
     def getWordsFromReutersDoc(self, doc):
         return self.getWords(reuters.raw(doc))

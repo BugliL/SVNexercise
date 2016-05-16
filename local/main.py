@@ -1,0 +1,1 @@
+/home/bugli/Progetto AI/src/progetto/main.py
