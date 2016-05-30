@@ -8,16 +8,16 @@ def hinge_loss(w,x,y):
     y is a vector of labels
     """
     loss,grad = 0,0
-    for (x_,y_) in zip(x,y):
-        v = y_*np.dot(w,x_)
-        loss += max(0,1-v)
+    for (x_, y_) in zip(x, y):
+        v = y_ * np.dot(w, x_)
+        loss += max(0, 1-v)
         grad += 0 if v > 1 else -y_*x_
-    return (loss,grad)
+    return (loss, grad)
 
-def grad_descent(x,y,w,step,thresh=0.001):
+def grad_descent(x, y, w, step, thresh=0.001):
     grad = np.inf
     ws = np.zeros((2,0))
-    ws = np.hstack((ws,w.reshape(2,1)))
+    ws = np.hstack((ws, w.reshape(2, 1)))
     step_num = 1
     delta = np.inf
     loss0 = np.inf
@@ -26,17 +26,17 @@ def grad_descent(x,y,w,step,thresh=0.001):
         delta = loss0-loss
         loss0 = loss
         grad_dir = grad/np.linalg.norm(grad)
-        w = w-step*grad_dir/step_num
-        ws = np.hstack((ws,w.reshape((2,1))))
+        w = w - step * grad_dir / step_num
+        ws = np.hstack((ws, w.reshape((2, 1))))
         step_num += 1
-    return np.sum(ws,1)/np.size(ws,1)
+    return np.sum(ws, 1) / np.size(ws, 1)
 
 def test1():
     # sample data points
     x1 = np.array((0,1,3,4,1))
     x2 = np.array((1,2,0,1,1))
-    x  = np.vstack((x1,x2)).T
-    print "x1={}\nx2={}\nx={}".format(x1,x2,x)
+    x = np.vstack((x1,x2)).T
+    print "x1={}\nx2={}\nx={}".format(x1, x2, x)
 
     # sample labels
     y = np.array((1,1,-1,-1,-1))
@@ -44,7 +44,7 @@ def test1():
     print "y={}\nw={}".format(y,w)
 
     loss, grad = hinge_loss(w,x,y)
-    print "loss={}\ngrad={}".format(loss,grad)
+    print "loss={}\ngrad={}".format(loss, grad)
     plot_test(x,y,w)
 
 def plot_test(x,y,w):
