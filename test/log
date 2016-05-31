@@ -1,0 +1,63 @@
+1 00:58:44 ✗ bugli@drone progetto $ python mainSGD.py
+2016-05-31 01:00:18,849 Lista dei documenti reuters
+2016-05-31 01:00:18,852     6489 documenti per il training
+2016-05-31 01:00:18,852     2545 documenti per il test
+2016-05-31 01:00:18,852       10 categoridef getCategory(self, category)
+2016-05-31 01:00:18,852 Caricamento dati da processare
+2016-05-31 01:00:30,872 Vettorizzazione dei documenti
+2016-05-31 01:00:32,335 Numero di parole nella bag of words : 21440
+2016-05-31 01:00:32,336 Creazione SVM
+2016-05-31 01:00:32,336 Training SVM...
+Traceback (most recent call last):
+  File "mainSGD.py", line 102, in <module>
+    svm.fit(matrix=train_matrix, categories=train_categories, n=n)
+  File "/home/bugli/Progetto_AI/src/progetto/SGD_SVM.py", line 21, in fit
+    self.w = self.grad_descent(matrix, categories, np.array((0,) * n), step=step)
+  File "/home/bugli/Progetto_AI/src/progetto/SGD_SVM.py", line 77, in grad_descent
+    logging.enable(logging.NOTSET)
+AttributeError: 'module' object has no attribute 'enable'
+1 01:51:30 ✗ bugli@drone progetto $ python mainSGD.py
+2016-05-31 06:15:40,794 Lista dei documenti reuters
+2016-05-31 06:15:40,796     6489 documenti per il training
+2016-05-31 06:15:40,796     2545 documenti per il test
+2016-05-31 06:15:40,796       10 categoridef getCategory(self, category)
+2016-05-31 06:15:40,796 Caricamento dati da processare
+2016-05-31 06:15:52,718 Vettorizzazione dei documenti
+2016-05-31 06:15:54,183 Numero di parole nella bag of words : 21440
+2016-05-31 06:15:54,184 Creazione SVM
+2016-05-31 06:15:54,184 Training SVM...
+[  1.962e-05   8.982e-06   3.565e-04 ...,   1.081e-04   1.544e-05
+   6.454e-06]
+2016-05-31 07:07:11,382 Prediction.....
+2016-05-31 07:07:11,383 Calcolo di HIT RATE
+2016-05-31 07:07:11,634 Hit rate : 0.968494271686
+0 07:07:11 ✓ bugli@drone progetto $ python mainSGD.py
+2016-05-31 07:20:28,343 Lista dei documenti reuters
+2016-05-31 07:20:28,347     6489 documenti per il training
+2016-05-31 07:20:28,348     2545 documenti per il test
+2016-05-31 07:20:28,348       10 categoridef getCategory(self, category)
+2016-05-31 07:20:28,348 Caricamento dati da processare
+2016-05-31 07:20:40,256 Vettorizzazione dei documenti
+2016-05-31 07:20:40,294 Numero di parole nella bag of words : 1926
+2016-05-31 07:20:40,294 Creazione SVM
+2016-05-31 07:20:40,294 Training SVM...
+[ 0.001  0.002 -0.003 ...,  0.001  0.003  0.001]
+2016-05-31 07:20:42,037 Prediction.....
+2016-05-31 07:20:42,037 Calcolo di HIT RATE
+2016-05-31 07:20:42,039 Hit rate : 0.93
+0 07:20:42 ✓ bugli@drone progetto $ python mainSGD.py
+2016-05-31 07:21:49,745 Lista dei documenti reuters
+2016-05-31 07:21:49,747     6489 documenti per il training
+2016-05-31 07:21:49,747     2545 documenti per il test
+2016-05-31 07:21:49,748       10 categoridef getCategory(self, category)
+2016-05-31 07:21:49,748 Caricamento dati da processare
+2016-05-31 07:22:01,672 Vettorizzazione dei documenti
+2016-05-31 07:22:01,943 Numero di parole nella bag of words : 8322
+2016-05-31 07:22:01,944 Creazione SVM
+2016-05-31 07:22:01,944 Training SVM...
+[  3.889e-05   8.284e-05   7.778e-05 ...,   2.946e-04   2.946e-04
+   9.314e-05]
+2016-05-31 07:23:30,618 Prediction.....
+2016-05-31 07:23:30,618 Calcolo di HIT RATE
+2016-05-31 07:23:30,665 Hit rate : 0.969
+0 07:23:30 ✓ bugli@drone progetto $

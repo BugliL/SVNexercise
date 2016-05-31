@@ -40,7 +40,7 @@ def create_tfidf_data(docs,categories,n=None):
         if c in categories:
             y.append(getSVMCategory(cat_num[c]))
             corpus.append(reuters.raw(d).lower())
-    return y, corpus
+    return y[:1000], corpus[:1000]
 
 if __name__ == "__main__":
     """
@@ -63,7 +63,7 @@ if __name__ == "__main__":
 
     # Lettura dei documenti
     logger.info("Lista dei documenti reuters")
-    training_docs = futils.loadListFromFile("training")[:30]
+    training_docs = futils.loadListFromFile("training")
     test_docs = futils.loadListFromFile("test")
     categories_docs = futils.loadListFromFile("categories")
 
@@ -84,11 +84,6 @@ if __name__ == "__main__":
 
     vectorizer = CountVectorizer(min_df=1, stop_words='english',analyzer='word',token_pattern='[a-z]\w+')
     train_matrix = vectorizer.fit_transform(train_corpus).toarray()
-
-    x1 = np.array((0, 1, 3, 4, 1))
-    x2 = np.array((1, 2, 0, 1, 1))
-    x = np.vstack((x1, x2)).T
-
     test_matrix = vectorizer.transform(test_corpus).toarray()
 
     # finita questa fase ho trasformato tutti i documenti in vettori
@@ -98,26 +93,14 @@ if __name__ == "__main__":
     n = len(vocab)
     logger.info("Numero di parole nella bag of words : {}".format(n))
 
-    svm = SGD_SVM()
-    #w = svm.grad_descent(x=train_matrix, y=train_categories, w=np.array((0,)*n), step=0.1)
-
-    #loss, grad = svm.hinge_loss(w, train_matrix, train_categories)
-    #print "loss={}\ngrad={}".format(loss, grad)
-
-    # matrix e' una matrice di documenti-occorrenze_token
-    # categories contiene le categorie di ogni documento
-    # (train_matrix, train_categories)
-
-    # support vector classifier
     logger.info("Creazione SVM")
+    svm = SGD_SVM()
+
     # svm = SVC(C=1000000.0, gamma='auto', kernel='rbf')
     # svm = SGD_SVM(n)
     logger.info("Training SVM...")
-    #svm.fit(train_matrix, train_categories)
     svm.fit(matrix=train_matrix, categories=train_categories, n=n)
     logger.info("Prediction.....")
-
-    #predictions = svm.predict(test_matrix)
 
     # verifica dei risultati
     # hit rate - validita' delle previsioni in termini di percentuale
