@@ -1,5 +1,5 @@
 import logging
-
+import matplotlib.pyplot as plt
 import numpy as np
 import sys
 
@@ -74,7 +74,6 @@ class SGD_SVM():
             t += 1
 
         logging.disable(logging.NOTSET)
-        print np.sum(ws, 1) / np.size(ws, 1)
         return np.sum(ws, 1) / np.size(ws, 1)
 
     def hinge_loss(self, w, x, y):
@@ -128,8 +127,26 @@ class SGD_SVM():
         logger.info("-"*80)
         logger.info("{}".format(w))
         logger.info("-"*80)
+        self.plot_test(x,y,w)
+
+    def plot_test(self, x, y, w):
+        plt.figure()
+        x1, x2 = x[:, 0], x[:, 1]
+        x1_min, x1_max = np.min(x1) * .7, np.max(x1) * 1.3
+        x2_min, x2_max = np.min(x2) * .7, np.max(x2) * 1.3
+        gridpoints = 2000
+        x1s = np.linspace(x1_min, x1_max, gridpoints)
+        x2s = np.linspace(x2_min, x2_max, gridpoints)
+        gridx1, gridx2 = np.meshgrid(x1s, x2s)
+        grid_pts = np.c_[gridx1.ravel(), gridx2.ravel()]
+        predictions = np.array([np.sign(np.dot(w, x_)+0.5) for x_ in grid_pts]).reshape((gridpoints, gridpoints))
+        plt.contourf(gridx1, gridx2, predictions, cmap=plt.cm.Paired)
+        plt.scatter(x[:, 0], x[:, 1], c=y, cmap=plt.cm.Paired)
+        plt.title('total hinge loss: %g' % self.hinge_loss(w, x, y)[0])
+        plt.show()
+        plt.savefig('test.png')
 
 
 if __name__ == '__main__':
-    svm = SGD_SVM(2)
+    svm = SGD_SVM()
     svm.test1()
